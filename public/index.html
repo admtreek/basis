@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basis</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="panel hero">
+        <p class="eyebrow">Basis</p>
+        <h1>Вход в общий поток обращений</h1>
+        <p class="lead">
+          Пользователь входит по логину и паролю, созданным в PocketBase администратором.
+        </p>
+      </section>
+
+      <section class="panel auth-panel" id="auth-panel">
+        <div id="guest-view">
+          <h2>Авторизация</h2>
+          <form id="login-form" class="stack">
+            <label class="field">
+              <span>Логин или email</span>
+              <input id="identity" name="identity" type="text" autocomplete="username" required />
+            </label>
+
+            <label class="field">
+              <span>Пароль</span>
+              <input id="password" name="password" type="password" autocomplete="current-password" required />
+            </label>
+
+            <button class="button" type="submit">Войти</button>
+          </form>
+        </div>
+
+        <div id="user-view" class="hidden">
+          <h2>Сессия активна</h2>
+          <p class="status-line">
+            Вы вошли как <strong id="user-name"></strong>.
+          </p>
+          <p class="muted">
+            На следующем этапе здесь появится общий поток обращений.
+          </p>
+          <button class="button secondary" id="logout-button" type="button">Выйти</button>
+        </div>
+
+        <p id="status" class="status" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
