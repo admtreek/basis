@@ -51,6 +51,29 @@ function setStatus(message) {
   statusNode.textContent = message;
 }
 
+function extractErrorMessage(errorData, fallbackMessage) {
+  if (!errorData || typeof errorData !== "object") {
+    return fallbackMessage;
+  }
+
+  if (typeof errorData.message === "string" && errorData.message.trim()) {
+    const details = errorData.data && typeof errorData.data === "object"
+      ? Object.entries(errorData.data)
+          .map(([key, value]) => {
+            const text = value && typeof value === "object" && "message" in value
+              ? value.message
+              : JSON.stringify(value);
+            return key + ": " + text;
+          })
+          .join("; ")
+      : "";
+
+    return details ? errorData.message + " " + details : errorData.message;
+  }
+
+  return fallbackMessage;
+}
+
 function stopPolling() {
   if (!refreshTimerId) {
     return;
@@ -96,7 +119,7 @@ async function login(identity, password) {
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    const message = errorData?.message || "Не удалось выполнить вход.";
+    const message = extractErrorMessage(errorData, "Не удалось выполнить вход.");
     throw new Error(message);
   }
 
@@ -118,7 +141,8 @@ async function fetchRequests() {
   }
 
   if (!response.ok) {
-    throw new Error("Не удалось загрузить обращения.");
+    const errorData = await response.json().catch(() => ({}));
+    throw new Error(extractErrorMessage(errorData, "Не удалось загрузить обращения."));
   }
 
   const data = await response.json();
@@ -149,7 +173,7 @@ async function createRequest(message) {
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
-    const messageText = errorData?.message || "Не удалось отправить обращение.";
+    const messageText = extractErrorMessage(errorData, "Не удалось отправить обращение.");
     throw new Error(messageText);
   }
 
