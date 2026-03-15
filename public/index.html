@@ -35,14 +35,39 @@
         </div>
 
         <div id="user-view" class="hidden">
-          <h2>Сессия активна</h2>
-          <p class="status-line">
-            Вы вошли как <strong id="user-name"></strong>.
-          </p>
-          <p class="muted">
-            На следующем этапе здесь появится общий поток обращений.
-          </p>
-          <button class="button secondary" id="logout-button" type="button">Выйти</button>
+          <div class="user-bar">
+            <div>
+              <h2>Общий поток обращений</h2>
+              <p class="status-line">
+                Вы вошли как <strong id="user-name"></strong>.
+              </p>
+            </div>
+            <button class="button secondary" id="logout-button" type="button">Выйти</button>
+          </div>
+
+          <form id="request-form" class="stack composer">
+            <label class="field">
+              <span>Текст обращения</span>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                placeholder="Например: привет, нужна помощь с заказом"
+                required
+              ></textarea>
+            </label>
+
+            <button class="button" type="submit">Отправить обращение</button>
+          </form>
+
+          <div class="stream-head">
+            <p class="muted">
+              Ниже видны все обращения всех авторизованных пользователей.
+            </p>
+            <button class="button ghost" id="refresh-button" type="button">Обновить</button>
+          </div>
+
+          <div id="requests-list" class="requests-list"></div>
         </div>
 
         <p id="status" class="status" aria-live="polite"></p>

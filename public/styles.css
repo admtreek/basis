@@ -77,6 +77,22 @@ h2 {
   padding: 32px;
 }
 
+.user-bar,
+.stream-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.user-bar {
+  margin-bottom: 24px;
+}
+
+.composer {
+  margin-bottom: 24px;
+}
+
 .stack {
   display: grid;
   gap: 16px;
@@ -101,6 +117,17 @@ h2 {
   color: var(--text);
 }
 
+.field textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(62, 47, 33, 0.18);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.8);
+  font: inherit;
+  color: var(--text);
+  resize: vertical;
+}
+
 .button {
   border: 0;
   border-radius: 999px;
@@ -115,10 +142,44 @@ h2 {
   background: #445c3a;
 }
 
+.button.ghost {
+  background: transparent;
+  color: var(--accent-dark);
+  border: 1px solid rgba(62, 47, 33, 0.18);
+}
+
 .status {
   margin-top: 16px;
   min-height: 24px;
   color: var(--accent-dark);
+}
+
+.requests-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.request-card {
+  padding: 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(62, 47, 33, 0.12);
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.request-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.request-message {
+  margin: 0;
+  line-height: 1.6;
+  white-space: pre-wrap;
 }
 
 .hidden {
@@ -134,5 +195,11 @@ h2 {
   .hero,
   .auth-panel {
     padding: 22px;
+  }
+
+  .user-bar,
+  .stream-head {
+    align-items: stretch;
+    flex-direction: column;
   }
 }
